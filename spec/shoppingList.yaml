@@ -1,0 +1,151 @@
+openapi: 3.1.0
+info:
+  title: Shopping List API
+  description: Shopping List API
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080'
+paths:
+  /list:
+    get:
+      description: Returns all lists the user has access to
+      tags:
+        - ShoppingList
+      responses:
+        '200':
+          description: A list of all pets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ShoppingList'
+    post:
+      description: Add new shopping List
+      tags:
+        - ShoppingList
+      responses:
+        '201':
+          description: Successfully created new List
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingList'
+        '400':
+          $ref: "#/components/responses/IllegalInput"
+  /list/{id}:
+    get:
+      tags:
+        - ShoppingList
+      parameters:
+        - $ref: "#/components/parameters/idParam"
+      description: Returns a list by id
+      responses:
+        '200':
+          description: The shopping list with the corresponding id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingList'
+        '404':
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - ShoppingList
+      parameters:
+        - $ref: "#/components/parameters/idParam"
+      description: Update an list by id
+      responses:
+        '200':
+          description: Successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingList'
+        '400':
+          $ref: "#/components/responses/IllegalInput"
+        '404':
+          $ref: "#/components/responses/NotFound"
+      requestBody:
+        $ref: '#/components/requestBodies/ShoppingListRequest'
+    delete:
+      tags:
+        - ShoppingList
+      parameters:
+        - $ref: "#/components/parameters/idParam"
+      description: Delete an list by id
+      responses:
+        '200':
+          description: Successfully deleted
+        '404':
+          $ref: "#/components/responses/NotFound"
+components:
+  schemas:
+    ShoppingList:
+      type: object
+      properties:
+        resource_id:
+          type: string
+          format: 'uuid'
+        name:
+          type: string
+        description:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+    Item:
+      type: object
+      required:
+        - resource_id
+        - name
+      properties:
+        resource_id:
+          type: string
+          format: 'uuid'
+        ean:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+    ApiErrorResponse:
+      type: object
+      required:
+        - errorCode
+        - message
+      properties:
+        errorCode:
+          type: integer
+        message:
+          type: string
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ApiErrorResponse"
+    IllegalInput:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ApiErrorResponse"
+  requestBodies:
+    ShoppingListRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ShoppingList'
