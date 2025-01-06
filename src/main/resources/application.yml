@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://172.18.180.61:5432/shopping_list
+    username: postgres
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: none

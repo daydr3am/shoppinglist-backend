@@ -45,9 +45,13 @@ openApiGenerate {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.flywaydb:flyway-core'
+
+    implementation group: 'org.flywaydb', name: 'flyway-database-postgresql', version: '11.1.0'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.4'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

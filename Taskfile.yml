@@ -1,0 +1,17 @@
+version: 3
+
+env:
+  DB_HOST: localhost
+  DB_PORT: 5432
+  DB_PASS: test
+  DB_USER: postgres
+  DB_DATABASE: shopping_list
+
+tasks:
+  start db:
+    cmds:
+      - docker compose -f docker-compose.yml up -d db
+      - bash ./scripts/setup_db.sh
+  clean:
+    cmds:
+      - docker compose -f docker-compose.yml down
