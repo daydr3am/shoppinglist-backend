@@ -8,7 +8,7 @@ do
   sleep $TIME_BETWEEN_TRIES
 done
 
-if [ pg_isready -h $DB_HOST -p $DB_PORT > /dev/null 2&>1 ] ;
+if [ pg_isready -h $DB_HOST -p $DB_PORT > /dev/null 2>&1 ] ;
 then
   exit 1
 fi
