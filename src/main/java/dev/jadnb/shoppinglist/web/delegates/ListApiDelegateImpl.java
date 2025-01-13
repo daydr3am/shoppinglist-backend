@@ -1,21 +1,14 @@
-package dev.jadnb.shoppinglist.web;
+package dev.jadnb.shoppinglist.web.delegates;
 
 import dev.jadnb.shoppinglist.api.ListApiDelegate;
 import dev.jadnb.shoppinglist.model.ShoppingList;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class ListApiDelegateImpl implements ListApiDelegate {
-
-    @Override
-    public Optional<NativeWebRequest> getRequest() {
-        return ListApiDelegate.super.getRequest();
-    }
 
     @Override
     public ResponseEntity<List<ShoppingList>> listGet() {

@@ -3,6 +3,7 @@ BEGIN;
 CREATE TABLE app_user
 (
     id           bigserial PRIMARY KEY,
+    uuid         varchar(100) NOT NULL,
     first_name   varchar(100),
     last_name    varchar(100),
     display_name varchar(100)
@@ -13,7 +14,7 @@ CREATE TABLE shopping_list
     id          bigserial PRIMARY KEY,
     resource_id varchar(100) NOT NULL,
     owner       bigint       NOT NULL,
-    CONSTRAINT FK_ShoppingList_User_Owner FOREIGN KEY (owner) REFERENCES app_user(id)
+    CONSTRAINT FK_ShoppingList_User_Owner FOREIGN KEY (owner) REFERENCES app_user (id)
 );
 
 CREATE TABLE item
