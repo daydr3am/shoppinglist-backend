@@ -1,7 +1,12 @@
 package dev.jadnb.shoppinglist.business.persitence.respository;
 
-import dev.jadnb.shoppinglist.business.persitence.model.ShoppingListEntity;
+import dev.jadnb.shoppinglist.business.persitence.model.ShoppingListModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ShoppingListRepository extends JpaRepository<ShoppingListEntity, Long> {
+import java.util.List;
+import java.util.UUID;
+
+public interface ShoppingListRepository extends JpaRepository<ShoppingListModel, Long> {
+
+    List<ShoppingListModel> findShoppingListModelsByUserUuid(UUID userUuid);
 }

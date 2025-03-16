@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-public class ShoppingListEntity {
+public class ShoppingListModel {
 
     @Id
     @GeneratedValue
@@ -20,9 +20,11 @@ public class ShoppingListEntity {
             mappedBy = "shoppingList",
             cascade = CascadeType.ALL
     )
-    private List<ShoppingItemEntity> items;
+    private List<ShoppingItemModel> items;
 
-    private void addItem(ShoppingItemEntity item) {
+    private UUID userUuid;
+
+    public void addItem(ShoppingItemModel item) {
         item.setShoppingList(this);
         items.add(item);
     }

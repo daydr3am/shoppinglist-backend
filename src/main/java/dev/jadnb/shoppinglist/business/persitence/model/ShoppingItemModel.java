@@ -5,14 +5,14 @@ import lombok.Data;
 
 @Entity
 @Data
-public class ShoppingItemEntity {
+public class ShoppingItemModel {
 
     @GeneratedValue
     @Id
     private long id;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private ShoppingListEntity shoppingList;
+    private ShoppingListModel shoppingList;
 
     private long quantity;
 }

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-public class ItemEntity {
+public class ItemModel {
 
     @Id
     @GeneratedValue
